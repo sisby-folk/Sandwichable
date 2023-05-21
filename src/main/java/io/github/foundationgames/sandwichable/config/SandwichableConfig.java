@@ -11,9 +11,7 @@ import io.github.foundationgames.sandwichable.items.ItemsRegistry;
 import io.github.foundationgames.sandwichable.util.Util;
 import io.github.foundationgames.sandwichable.worldgen.CascadeFeatureConfig;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
@@ -48,7 +46,6 @@ public class SandwichableConfig extends ConfigInABarrel {
     }
 
     public static class ItemOptions {
-        public KitchenKnifeOption[] knives = knivesDefault();
         @Value(gui = false) public String saltItem = "sandwichable:salt";
         @Value(gui = false) public String cucumberItem = "sandwichable:cucumber";
         @Value(gui = false) public String pickledCucumberItem = "sandwichable:pickled_cucumber";
@@ -67,40 +64,9 @@ public class SandwichableConfig extends ConfigInABarrel {
                 Util.itemFromString(burntMorselItem, () -> new ItemStack(ItemsRegistry.BURNT_MORSEL)));
     }
 
-    public static KitchenKnifeOption[] knivesDefault() {
-        return new KitchenKnifeOption[] {
-                new KitchenKnifeOption("sandwichable:stone_kitchen_knife", 1, 132),
-                new KitchenKnifeOption("sandwichable:kitchen_knife", 3, 850),
-                new KitchenKnifeOption("sandwichable:golden_kitchen_knife", 5, 225),
-                new KitchenKnifeOption("sandwichable:diamond_kitchen_knife", 8, 1025),
-                new KitchenKnifeOption("sandwichable:netherite_kitchen_knife", 20, 1984),
-                new KitchenKnifeOption("sandwichable:glass_kitchen_knife", 1, 0)
-        };
-    }
-
-    public KitchenKnifeOption getKnifeOption(String knife) {
-        for (KitchenKnifeOption opt : itemOptions.knives) {
-            if (knife.equals(opt.itemId)) {
-                return opt;
-            }
-        }
-        return null;
-    }
-
-    public KitchenKnifeOption getKnifeOption(Item knife) {
-        return this.getKnifeOption(Registry.ITEM.getId(knife).toString());
-    }
-
     @Override
     public void afterLoad() {
         super.afterLoad();
-        KitchenKnifeOption[] defaults = knivesDefault();
-        for (KitchenKnifeOption def : defaults) {
-            KitchenKnifeOption opt = getKnifeOption(def.itemId);
-            if (opt != null && opt.sharpness == 0) {
-                opt.sharpness = def.sharpness;
-            }
-        }
     }
 
     @Override
@@ -117,18 +83,6 @@ public class SandwichableConfig extends ConfigInABarrel {
                 DataResult<Pair<CascadeFeatureConfig, JsonElement>> result = CascadeFeatureConfig.CODEC.decode(JsonOps.INSTANCE, saltPools.get("drySaltPoolConfig"));
                 result.get().ifLeft(p -> this.saltPoolGenOptions.drySaltPoolConfig = p.getFirst()).ifRight(p -> Sandwichable.LOG.error(p.message()));
             }
-        }
-    }
-
-    public static class KitchenKnifeOption {
-        public String itemId;
-        public int value;
-        public int sharpness;
-
-        public KitchenKnifeOption(String item, int value, int sharpness) {
-            this.itemId = item;
-            this.value = value;
-            this.sharpness = sharpness;
         }
     }
 

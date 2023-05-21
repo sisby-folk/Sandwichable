@@ -10,7 +10,6 @@ import io.github.foundationgames.sandwichable.items.SandwichBlockItem;
 import io.github.foundationgames.sandwichable.util.Util;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
@@ -32,16 +31,6 @@ public final class BlocksRegistry {
     public static final Block ANCIENT_GRAIN = new AncientGrainBlock(FabricBlockSettings.copy(Blocks.WHEAT).offsetType(AbstractBlock.OffsetType.XZ));
 
     public static final Block SANDWICH = new SandwichBlock(FabricBlockSettings.copy(Blocks.CAKE).nonOpaque());
-
-    public static final Block OAK_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
-    public static final Block BIRCH_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
-    public static final Block SPRUCE_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
-    public static final Block JUNGLE_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
-    public static final Block ACACIA_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
-    public static final Block DARK_OAK_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
-    public static final Block MANGROVE_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
-    public static final Block CRIMSON_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
-    public static final Block WARPED_CUTTING_BOARD = new CuttingBoardBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE));
 
     public static final Block ANDESITE_BASIN = new BasinBlock(FabricBlockSettings.copy(Blocks.ANDESITE));
     public static final Block DIORITE_BASIN = new BasinBlock(FabricBlockSettings.copy(Blocks.DIORITE));
@@ -88,7 +77,6 @@ public final class BlocksRegistry {
 
     public static BlockEntityType<SandwichTableBlockEntity> SANDWICHTABLE_BLOCKENTITY;
     public static BlockEntityType<SandwichBlockEntity> SANDWICH_BLOCKENTITY;
-    public static BlockEntityType<CuttingBoardBlockEntity> CUTTINGBOARD_BLOCKENTITY;
     public static BlockEntityType<ToasterBlockEntity> TOASTER_BLOCKENTITY;
     public static BlockEntityType<BasinBlockEntity> BASIN_BLOCKENTITY;
     public static BlockEntityType<PickleJarBlockEntity> PICKLEJAR_BLOCKENTITY;
@@ -115,22 +103,6 @@ public final class BlocksRegistry {
         registerBlock(WAXED_EXPOSED_COPPER_BASIN, "waxed_exposed_copper_basin", Sandwichable.SANDWICHABLE_ITEMS);
         registerBlock(WAXED_WEATHERED_COPPER_BASIN, "waxed_weathered_copper_basin", Sandwichable.SANDWICHABLE_ITEMS);
         registerBlock(WAXED_OXIDIZED_COPPER_BASIN, "waxed_oxidized_copper_basin", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(OAK_CUTTING_BOARD, "oak_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(BIRCH_CUTTING_BOARD, "birch_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(SPRUCE_CUTTING_BOARD, "spruce_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(JUNGLE_CUTTING_BOARD, "jungle_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(ACACIA_CUTTING_BOARD, "acacia_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(DARK_OAK_CUTTING_BOARD, "dark_oak_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(MANGROVE_CUTTING_BOARD, "mangrove_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
-        FuelRegistry.INSTANCE.add(OAK_CUTTING_BOARD, 320);
-        FuelRegistry.INSTANCE.add(BIRCH_CUTTING_BOARD, 320);
-        FuelRegistry.INSTANCE.add(SPRUCE_CUTTING_BOARD, 320);
-        FuelRegistry.INSTANCE.add(JUNGLE_CUTTING_BOARD, 320);
-        FuelRegistry.INSTANCE.add(ACACIA_CUTTING_BOARD, 320);
-        FuelRegistry.INSTANCE.add(DARK_OAK_CUTTING_BOARD, 320);
-        FuelRegistry.INSTANCE.add(MANGROVE_CUTTING_BOARD, 320);
-        registerBlock(CRIMSON_CUTTING_BOARD, "crimson_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(WARPED_CUTTING_BOARD, "warped_cutting_board", Sandwichable.SANDWICHABLE_ITEMS);
         registerBlock(SHRUB, "shrub", Sandwichable.SANDWICHABLE_ITEMS);
         registerBlock(BOTTLE_CRATE, "bottle_crate", Sandwichable.SANDWICHABLE_ITEMS);
         registerBlock(POTTED_SHRUB, "potted_shrub");
@@ -152,9 +124,6 @@ public final class BlocksRegistry {
         registerBlock(PICKLE_BRINE, "pickle_brine");
 
         SANDWICHTABLE_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("sandwich_table_ent"), FabricBlockEntityTypeBuilder.create(SandwichTableBlockEntity::new, SANDWICH_TABLE).build(null));
-        CUTTINGBOARD_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("cutting_board_ent"), FabricBlockEntityTypeBuilder.create(CuttingBoardBlockEntity::new,
-                OAK_CUTTING_BOARD, BIRCH_CUTTING_BOARD, SPRUCE_CUTTING_BOARD, JUNGLE_CUTTING_BOARD, ACACIA_CUTTING_BOARD, DARK_OAK_CUTTING_BOARD, MANGROVE_CUTTING_BOARD, CRIMSON_CUTTING_BOARD, WARPED_CUTTING_BOARD
-        ).build(null));
         SANDWICH_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("sandwich_ent"), FabricBlockEntityTypeBuilder.create(SandwichBlockEntity::new, SANDWICH).build(null));
         TOASTER_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("toaster_ent"), FabricBlockEntityTypeBuilder.create(ToasterBlockEntity::new, TOASTER).build(null));
         BASIN_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("basin_ent"), FabricBlockEntityTypeBuilder.create(BasinBlockEntity::new,

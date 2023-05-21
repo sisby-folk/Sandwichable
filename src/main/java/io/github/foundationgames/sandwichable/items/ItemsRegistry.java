@@ -124,12 +124,6 @@ public final class ItemsRegistry {
     public static final Item BURNT_MORSEL = new InfoTooltipItem(new Item.Settings().food(BURNTMORSEL).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item CHARRED_MORSEL = new InfoTooltipItem(new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
 
-    public static final Item STONE_KITCHEN_KNIFE = new KitchenKnifeItem(new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS));
-    public static final Item IRON_KITCHEN_KNIFE = new KitchenKnifeItem(new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS));
-    public static final Item GOLDEN_KITCHEN_KNIFE = new KitchenKnifeItem(new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS));
-    public static final Item DIAMOND_KITCHEN_KNIFE = new KitchenKnifeItem(new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS));
-    public static final Item NETHERITE_KITCHEN_KNIFE = new KitchenKnifeItem(new Item.Settings().maxCount(1).fireproof().group(Sandwichable.SANDWICHABLE_ITEMS));
-    public static final Item GLASS_KITCHEN_KNIFE = new InfoTooltipItem(new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item SANDWICH_TABLE_MINECART = new CustomMinecartItem(EntitiesRegistry.SANDWICH_TABLE_MINECART, new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item FERMENTING_MILK_BUCKET = new FermentingMilkBucketItem(new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item PICKLE_BRINE_BUCKET = new CustomBucketItem(FluidsRegistry.PICKLE_BRINE, new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS), world -> false);
@@ -154,12 +148,6 @@ public final class ItemsRegistry {
 
     public static void init() {
         registerItem(SANDWICH, "sandwich");
-        registerItem(STONE_KITCHEN_KNIFE, "stone_kitchen_knife");
-        registerItem(IRON_KITCHEN_KNIFE, "kitchen_knife");
-        registerItem(GOLDEN_KITCHEN_KNIFE, "golden_kitchen_knife");
-        registerItem(DIAMOND_KITCHEN_KNIFE, "diamond_kitchen_knife");
-        registerItem(NETHERITE_KITCHEN_KNIFE, "netherite_kitchen_knife");
-        registerItem(GLASS_KITCHEN_KNIFE, "glass_kitchen_knife");
         registerItem(BREAD_SLICE, "bread_slice");
         registerItem(TOASTED_BREAD_SLICE, "toasted_bread_slice");
         registerItem(LETTUCE_HEAD, "lettuce_head");

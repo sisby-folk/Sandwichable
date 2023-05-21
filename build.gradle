@@ -46,6 +46,7 @@ dependencies {
 		exclude(group: "io.github.prospector")
 	}
 	modApi "maven.modrinth:mealapi:${project.mealapi_version}"
+	modImplementation "maven.modrinth:farmers-delight-fabric:${project.farmersdelight_version}"
 
 	/*
 	modRuntimeOnly("squeek.appleskin:appleskin-fabric:${project.appleskin_version}") {

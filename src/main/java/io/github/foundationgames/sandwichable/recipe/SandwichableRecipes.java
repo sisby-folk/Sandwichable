@@ -9,7 +9,6 @@ import net.minecraft.recipe.SpecialRecipeSerializer;
 import net.minecraft.util.registry.Registry;
 
 public class SandwichableRecipes {
-    public static final RecipeType<CuttingRecipe> CUTTING_RECIPE = Registry.register(Registry.RECIPE_TYPE, Util.id(CuttingRecipe.Type.ID), CuttingRecipe.Type.INSTANCE);
     public static final RecipeType<ToastingRecipe> TOASTING_RECIPE = Registry.register(Registry.RECIPE_TYPE, Util.id(ToastingRecipe.Type.ID), ToastingRecipe.Type.INSTANCE);
 
     public static final SpecialRecipeSerializer<AncientGrainBreadRecipe> ANCIENT_GRAIN_BREAD = Registry.register(

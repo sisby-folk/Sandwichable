@@ -1,7 +1,6 @@
 package io.github.foundationgames.sandwichable;
 
 import io.github.foundationgames.sandwichable.advancement.CollectSandwichCriterion;
-import io.github.foundationgames.sandwichable.advancement.CutItemCriterion;
 import io.github.foundationgames.sandwichable.advancement.ToastItemCriterion;
 import io.github.foundationgames.sandwichable.advancement.UseBottleCrateCriterion;
 import io.github.foundationgames.sandwichable.blocks.BlocksRegistry;
@@ -12,12 +11,10 @@ import io.github.foundationgames.sandwichable.blocks.entity.container.Desalinato
 import io.github.foundationgames.sandwichable.blocks.loot.CopyWorldBiomeLootFunction;
 import io.github.foundationgames.sandwichable.common.CommonTags;
 import io.github.foundationgames.sandwichable.compat.CroptopiaCompat;
-import io.github.foundationgames.sandwichable.config.SandwichableConfig;
 import io.github.foundationgames.sandwichable.entity.EntitiesRegistry;
 import io.github.foundationgames.sandwichable.entity.SandwichTableMinecartEntity;
 import io.github.foundationgames.sandwichable.fluids.FluidsRegistry;
 import io.github.foundationgames.sandwichable.items.ItemsRegistry;
-import io.github.foundationgames.sandwichable.items.KitchenKnifeItem;
 import io.github.foundationgames.sandwichable.items.SandwichableGroupIconBuilder;
 import io.github.foundationgames.sandwichable.items.spread.SpreadType;
 import io.github.foundationgames.sandwichable.recipe.SandwichableRecipes;
@@ -28,8 +25,6 @@ import io.github.foundationgames.sandwichable.villager.SandwichMakerProfession;
 import io.github.foundationgames.sandwichable.worldgen.SandwichableWorldgen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -49,18 +44,11 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.LootFunctionType;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.tag.TagKey;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -75,16 +63,13 @@ public class Sandwichable implements ModInitializer {
     public static final TagKey<Item> BREAD_LOAVES = TagKey.of(Registry.ITEM_KEY, Util.id("bread_loaves"));
     public static final TagKey<Item> METAL_ITEMS = TagKey.of(Registry.ITEM_KEY, Util.id("metal_items"));
     public static final TagKey<Item> SMALL_FOODS = TagKey.of(Registry.ITEM_KEY, Util.id("small_foods"));
-    public static final TagKey<Item> CUTTING_BOARDS = TagKey.of(Registry.ITEM_KEY, Util.id("cutting_boards"));
     public static final TagKey<Item> CHEESE_WHEELS = TagKey.of(Registry.ITEM_KEY, Util.id("cheese_wheels"));
     public static final TagKey<Block> SALT_PRODUCING_BLOCKS = TagKey.of(Registry.BLOCK_KEY, Util.id("salt_producing_blocks"));
-    public static final TagKey<Block> KNIFE_SHARPENING_SURFACES = TagKey.of(Registry.BLOCK_KEY, Util.id("knife_sharpening_surfaces"));
 
     public static final TagKey<Biome> SALT_WATER_BODIES = TagKey.of(Registry.BIOME_KEY, Util.id("salt_water_bodies"));
     public static final TagKey<Biome> NO_SHRUBS = TagKey.of(Registry.BIOME_KEY, Util.id("no_shrubs"));
     public static final TagKey<Biome> NO_SALT_POOLS = TagKey.of(Registry.BIOME_KEY, Util.id("no_salt_pools"));
 
-    public static final CutItemCriterion CUT_ITEM = CriteriaAccessor.callRegister(new CutItemCriterion());
     public static final ToastItemCriterion TOAST_ITEM = CriteriaAccessor.callRegister(new ToastItemCriterion());
     public static final UseBottleCrateCriterion USE_BOTTLE_CRATE = CriteriaAccessor.callRegister(new UseBottleCrateCriterion());
     public static final CollectSandwichCriterion COLLECT_SANDWICH = CriteriaAccessor.callRegister(new CollectSandwichCriterion());
@@ -147,27 +132,6 @@ public class Sandwichable implements ModInitializer {
             } else {
                 return defaultBehavior.dispense(pointer, stack);
             }
-        });
-
-        UseBlockCallback.EVENT.register((player, world, hand, hit) -> {
-            BlockPos pos = hit.getBlockPos();
-            if (world.getBlockState(pos).isIn(KNIFE_SHARPENING_SURFACES)) {
-                ItemStack knife = player.getStackInHand(hand);
-                SandwichableConfig.KitchenKnifeOption opt = Util.getConfig().getKnifeOption(knife.getItem());
-                if (opt != null && KitchenKnifeItem.getSharpnessF(knife) < 1) {
-                    Vec3d hPos = hit.getPos();
-                    if (world.isClient()) {
-                        for (int i = 0; i < 4; i++) {
-                            world.addParticle(ParticleTypes.CRIT, hPos.x, hPos.y, hPos.z, (world.random.nextFloat() - 0.5) * 0.5, 0.1, (world.random.nextFloat() - 0.5) * 0.5);
-                        }
-                        return ActionResult.SUCCESS;
-                    }
-                    KitchenKnifeItem.setSharpness(knife, KitchenKnifeItem.getSharpness(knife) + 3);
-                    world.playSound(null, hPos.x, hPos.y, hPos.z, SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS, 0.7f, 1.5f + (world.random.nextFloat() * 0.2f));
-                    return ActionResult.CONSUME;
-                }
-            }
-            return ActionResult.PASS;
         });
 
         LootTableEvents.MODIFY.register((resources, loot, id, table, source) -> {
