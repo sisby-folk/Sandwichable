@@ -14,19 +14,12 @@
 	"item.sandwichable.lettuce_seeds": "Salatsamen",
 	"item.sandwichable.tomato_seeds": "Tomatensamen",
 	"item.sandwichable.burnt_food": "Verbranntes Essen",
-	"item.sandwichable.kitchen_knife": "Küchenmesser",
 	
 	"block.sandwichable.sandwich_table": "Sandwich-Tisch",
 	"block.sandwichable.sandwich": "Sandwich",
 	"block.sandwichable.zandwich": "Sandwich... ?",
 	"block.sandwichable.hackedsandwich": "Gehacktes Sandwich",
 	"block.sandwichable.hackedzandwich": "Gehacktes Sandwich... ?",
-	"block.sandwichable.oak_cutting_board": "Eichenholz-Schneidebrett",
-	"block.sandwichable.birch_cutting_board": "Birkenholz-Schneidebrett",
-	"block.sandwichable.spruce_cutting_board": "Fichtenholz-Schneidebrett",
-	"block.sandwichable.jungle_cutting_board": "Tropenholz-Schneidebrett",
-	"block.sandwichable.acacia_cutting_board": "Akazienholz-Schneidebrett",
-	"block.sandwichable.dark_oak_cutting_board": "Schwarzeichenholz-Schneidebrett",
 	"block.sandwichable.toaster": "Redstone-Toaster",
 	"block.sandwichable.andesite_basin": "Andesit-Becken",
 	"block.sandwichable.granite_basin": "Granit-Becken",
@@ -38,7 +31,6 @@
 	"sandwich.tooltip.bigsandwich": "Der Inbegriff von Sandwiches.",
 	"sandwich.tooltip.hacked": "Unbekannte Herkunft...",
 	
-	"category.sandwichable.cutting_board": "Schneiden",
 	"category.sandwichable.toasting": "Toasten",
 	
 	"category.sandwichable.toasting.time": "12 Sek.",

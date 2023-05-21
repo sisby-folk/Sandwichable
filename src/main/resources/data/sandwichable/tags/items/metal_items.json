@@ -1,8 +1,8 @@
 {
 	"replace": false,
 	"values": [
-		"sandwichable:kitchen_knife",
-		"sandwichable:golden_kitchen_knife",
+		"farmersdelight:iron_knife",
+		"farmersdelight:golden_knife",
 		"sandwichable:toaster",
 		"sandwichable:fermenting_milk_bucket",
 		"sandwichable:pickle_brine_bucket",

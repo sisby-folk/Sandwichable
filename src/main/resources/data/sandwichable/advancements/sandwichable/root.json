@@ -41,10 +41,7 @@
           },
 		  {
             "items": ["sandwichable:shrub"]
-          },
-		  {
-			"tag": "sandwichable:cutting_boards"
-		  }
+          }
         ]
       }
     }
