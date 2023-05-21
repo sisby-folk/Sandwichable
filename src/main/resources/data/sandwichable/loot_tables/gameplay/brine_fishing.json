@@ -42,6 +42,11 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 20,
+          "name": "sandwichable:lettuce_seeds"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 18,
           "name": "minecraft:stick"
         },
