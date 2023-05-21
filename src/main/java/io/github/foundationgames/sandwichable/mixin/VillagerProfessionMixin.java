@@ -21,7 +21,7 @@ public class VillagerProfessionMixin {
     private static ImmutableSet<Item> sandwichable$addFarmerPlantables(ImmutableSet<Item> old) {
         ImmutableSet.Builder<Item> builder = ImmutableSet.builder();
         builder.addAll(old);
-        builder.add(ItemsRegistry.TOMATO_SEEDS, ItemsRegistry.LETTUCE_SEEDS, ItemsRegistry.CUCUMBER_SEEDS, ItemsRegistry.ONION_SEEDS);
+        builder.add(ItemsRegistry.LETTUCE_SEEDS, ItemsRegistry.CUCUMBER_SEEDS);
         return builder.build();
     }
 }

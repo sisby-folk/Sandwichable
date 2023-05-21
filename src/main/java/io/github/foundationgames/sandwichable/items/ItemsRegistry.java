@@ -129,9 +129,7 @@ public final class ItemsRegistry {
     public static final Item PICKLE_BRINE_BUCKET = new CustomBucketItem(FluidsRegistry.PICKLE_BRINE, new Item.Settings().maxCount(1).group(Sandwichable.SANDWICHABLE_ITEMS), world -> false);
 
     public static final Item LETTUCE_SEEDS = new InfoTooltipAliasedBlockItem(BlocksRegistry.LETTUCE, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
-    public static final Item TOMATO_SEEDS = new InfoTooltipAliasedBlockItem(BlocksRegistry.TOMATOES, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item CUCUMBER_SEEDS = new InfoTooltipAliasedBlockItem(BlocksRegistry.CUCUMBERS, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
-    public static final Item ONION_SEEDS = new InfoTooltipAliasedBlockItem(BlocksRegistry.ONIONS, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item ANCIENT_GRAIN_SEEDS = new InfoTooltipAliasedBlockItem(BlocksRegistry.ANCIENT_GRAIN, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
 
     public static final Item EMPTY_PICKLE_JAR = new PickleJarBlockItem("pickle_jar.content.air", true, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
@@ -226,12 +224,8 @@ public final class ItemsRegistry {
         registerItem(SLICED_TOASTED_WARPED_FUNGUS, "sliced_toasted_warped_fungus");
         registerItem(LETTUCE_SEEDS, "lettuce_seeds");
         addCompostable(0.3f, LETTUCE_SEEDS);
-        registerItem(TOMATO_SEEDS, "tomato_seeds");
-        addCompostable(0.3f, TOMATO_SEEDS);
         registerItem(CUCUMBER_SEEDS, "cucumber_seeds");
         addCompostable(0.3f, CUCUMBER_SEEDS);
-        registerItem(ONION_SEEDS, "onion_seeds");
-        addCompostable(0.3f, ONION_SEEDS);
         registerItem(ANCIENT_GRAIN_SEEDS, "ancient_grain_seeds");
         addCompostable(0.4f, ANCIENT_GRAIN_SEEDS);
         registerItem(BURNT_FOOD, "burnt_food");
