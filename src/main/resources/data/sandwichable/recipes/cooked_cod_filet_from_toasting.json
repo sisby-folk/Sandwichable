@@ -3,5 +3,5 @@
 	"input": {
 		"tag": "c:cod_filet"
 	},
-	"output": "sandwichable:cooked_cod_filet"
+	"output": "farmersdelight:cooked_cod_slice"
 }
