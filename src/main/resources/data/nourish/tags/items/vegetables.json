@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "sandwichable:tomato",
+    "farmersdelight:tomato",
     "sandwichable:tomato_slice",
     "sandwichable:cooked_tomato_slice",
     "sandwichable:lettuce_head",
@@ -9,7 +9,7 @@
     "sandwichable:cucumber",
     "sandwichable:pickled_cucumber",
     "sandwichable:pickle_chips",
-    "sandwichable:onion",
+    "farmersdelight:onion",
     "sandwichable:chopped_onion",
     "sandwichable:cooked_chopped_onion",
     "sandwichable:chopped_carrot",

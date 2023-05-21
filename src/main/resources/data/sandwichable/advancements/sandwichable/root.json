@@ -28,13 +28,7 @@
             "items": ["sandwichable:sandwich_table"]
           },
 		  {
-            "items": ["sandwichable:tomato_seeds"]
-          },
-		  {
             "items": ["sandwichable:lettuce_seeds"]
-          },
-		  {
-            "items": ["sandwichable:onion_seeds"]
           },
 		  {
             "items": ["sandwichable:cucumber_seeds"]

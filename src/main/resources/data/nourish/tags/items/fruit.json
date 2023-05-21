@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "sandwichable:tomato",
+    "farmersdelight:tomato",
     "sandwichable:tomato_slice",
     "sandwichable:cooked_tomato_slice",
     "sandwichable:apple_slices",

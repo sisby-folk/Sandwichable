@@ -50,7 +50,6 @@ public class SandwichMakerProfession {
                         new TradeOffers.Factory[]{
                                 new TradeOffers.BuyForOneEmeraldFactory(Items.WHEAT, 20, 16, 2),
                                 new TradeOffers.BuyForOneEmeraldFactory(Items.BREAD, 6, 12, 2),
-                                new TradeOffers.BuyForOneEmeraldFactory(ItemsRegistry.TOMATO, 18, 16, 2),
                                 new TradeOffers.BuyForOneEmeraldFactory(ItemsRegistry.LETTUCE_HEAD, 14, 16, 2),
                                 new TradeOffers.SellItemFactory(ItemsRegistry.BREAD_SLICE, 1, 10, 16, 1)
                         },

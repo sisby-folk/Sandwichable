@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "sandwichable:onion",
+    "farmersdelight:onion",
     {
       "id": "croptopia:onion",
       "required": false

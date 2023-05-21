@@ -21,13 +21,11 @@ public final class ItemsRegistry {
     public static final FoodComponent ANCIENTGRAINBREAD = (new FoodComponent.Builder()).build();
     public static final FoodComponent LETTUCEHEAD = (new FoodComponent.Builder()).hunger(5).saturationModifier(0.8F).snack().build();
     public static final FoodComponent LETTUCELEAF = (new FoodComponent.Builder()).hunger(1).saturationModifier(0.3F).snack().build();
-    public static final FoodComponent TOMATO_FOOD = (new FoodComponent.Builder()).hunger(4).saturationModifier(0.42F).build();
     public static final FoodComponent TOMATOSLICE = (new FoodComponent.Builder()).hunger(2).saturationModifier(0.7F).snack().build();
     public static final FoodComponent COOKEDTOMATOSLICE = (new FoodComponent.Builder()).hunger(3).saturationModifier(0.7F).snack().build();
     public static final FoodComponent CUCUMBER_FOOD = (new FoodComponent.Builder()).hunger(3).saturationModifier(0.6F).build();
     public static final FoodComponent PICKLEDCUCUMBER = (new FoodComponent.Builder()).hunger(4).saturationModifier(0.6F).build();
     public static final FoodComponent PICKLECHIPS = (new FoodComponent.Builder()).hunger(2).saturationModifier(0.5F).snack().build();
-    public static final FoodComponent ONION_FOOD = (new FoodComponent.Builder()).hunger(3).saturationModifier(0.8F).build();
     public static final FoodComponent CHOPPEDONION = (new FoodComponent.Builder()).hunger(2).saturationModifier(0.6F).snack().build();
     public static final FoodComponent COOKEDCHOPPEDONION = (new FoodComponent.Builder()).hunger(3).saturationModifier(0.6F).snack().build();
     public static final FoodComponent BACON = (new FoodComponent.Builder()).hunger(4).saturationModifier(0.7F).meat().build();
@@ -81,7 +79,6 @@ public final class ItemsRegistry {
     public static final Item CHEESE_CULTURE_SOUR = new CheeseCultureItem(CheeseType.SOUR, 6, 0.77f, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS).recipeRemainder(Items.GLASS_BOTTLE).maxCount(1));
     public static final Item CHEESE_CULTURE_CANDESCENT = new CheeseCultureItem(CheeseType.CANDESCENT, 5, 0.63f, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS).recipeRemainder(Items.GLASS_BOTTLE).maxCount(1));
     public static final Item CHEESE_CULTURE_WARPED_BLEU = new CheeseCultureItem(CheeseType.WARPED_BLEU, 5, 0.6f, new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS).recipeRemainder(Items.GLASS_BOTTLE).maxCount(1));
-    public static final Item TOMATO = new InfoTooltipItem(new Item.Settings().food(TOMATO_FOOD).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item TOMATO_SLICE = new InfoTooltipItem(new Item.Settings().food(TOMATOSLICE).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item COOKED_TOMATO_SLICE = new InfoTooltipItem(new Item.Settings().food(COOKEDTOMATOSLICE).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item CUCUMBER = new InfoTooltipItem(new Item.Settings().food(CUCUMBER_FOOD).group(Sandwichable.SANDWICHABLE_ITEMS));
@@ -89,7 +86,6 @@ public final class ItemsRegistry {
     public static final Item PICKLE_CHIPS = new InfoTooltipItem(new Item.Settings().food(PICKLECHIPS).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item SALT_ROCK = new InfoTooltipItem(new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item SALT = new InfoTooltipItem(new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
-    public static final Item ONION = new InfoTooltipItem(new Item.Settings().food(ONION_FOOD).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item CHOPPED_ONION = new InfoTooltipItem(new Item.Settings().food(CHOPPEDONION).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item COOKED_CHOPPED_ONION = new InfoTooltipItem(new Item.Settings().food(COOKEDCHOPPEDONION).group(Sandwichable.SANDWICHABLE_ITEMS));
     public static final Item ANCIENT_GRAIN = new AncientGrainItem(new Item.Settings().group(Sandwichable.SANDWICHABLE_ITEMS));
@@ -152,8 +148,6 @@ public final class ItemsRegistry {
         addCompostable(0.65f, LETTUCE_HEAD);
         registerItem(LETTUCE_LEAF, "lettuce_leaf");
         addCompostable(0.3f, LETTUCE_LEAF);
-        registerItem(TOMATO, "tomato");
-        addCompostable(0.65f, TOMATO);
         registerItem(TOMATO_SLICE, "tomato_slice");
         addCompostable(0.3f, TOMATO_SLICE);
         registerItem(COOKED_TOMATO_SLICE, "cooked_tomato_slice");
@@ -168,8 +162,6 @@ public final class ItemsRegistry {
         registerItem(PICKLING_PICKLE_JAR, "pickling_pickle_jar");
         registerItem(PICKLE_FILLED_PICKLE_JAR, "pickle_filled_pickle_jar");
         registerItem(EMPTY_PICKLE_JAR, "empty_pickle_jar");
-        registerItem(ONION, "onion");
-        addCompostable(0.5f, ONION);
         registerItem(CHOPPED_ONION, "chopped_onion");
         addCompostable(0.3f, CHOPPED_ONION);
         registerItem(COOKED_CHOPPED_ONION, "cooked_chopped_onion");
