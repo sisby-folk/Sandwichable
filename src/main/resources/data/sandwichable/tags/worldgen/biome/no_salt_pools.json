@@ -3,6 +3,7 @@
   "values": [
     "#minecraft:is_ocean",
     "#minecraft:is_river",
-    "#sandwichable:no_shrubs"
+    "#c:in_nether",
+    "#c:in_the_end"
   ]
 }

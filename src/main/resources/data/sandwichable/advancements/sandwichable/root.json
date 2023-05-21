@@ -32,9 +32,6 @@
           },
 		  {
             "items": ["sandwichable:cucumber_seeds"]
-          },
-		  {
-            "items": ["sandwichable:shrub"]
           }
         ]
       }
