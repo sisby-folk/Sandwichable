@@ -25,17 +25,12 @@ public class SandwichableConfig extends ConfigInABarrel {
 
     @Value(gui = false) public ItemOptions itemOptions = new ItemOptions();
     public SaltySandGenOptions saltySandGenOptions = new SaltySandGenOptions();
-    public ShrubGenOptions shrubGenOptions = new ShrubGenOptions();
     public SaltPoolGenOptions saltPoolGenOptions = new SaltPoolGenOptions();
 
     public static class SaltySandGenOptions {
         public int rarity = 18;
         public int veinSize = 5;
         public int maxGenHeight = 128;
-    }
-
-    public static class ShrubGenOptions {
-        public int spawnTries = 10;
     }
 
     public static class SaltPoolGenOptions {

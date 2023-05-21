@@ -55,10 +55,6 @@ public final class BlocksRegistry {
 
     public static final Block PICKLE_JAR = new PickleJarBlock(FabricBlockSettings.copy(Blocks.GLASS_PANE));
 
-    public static final Block SHRUB = new ShrubBlock(FabricBlockSettings.copy(Blocks.DEAD_BUSH));
-
-    public static final Block POTTED_SHRUB = new PottedShrubBlock(SHRUB, FabricBlockSettings.copy(Blocks.POTTED_DEAD_BUSH));
-
     public static final Block BOTTLE_CRATE = new BottleCrateBlock(FabricBlockSettings.copy(Blocks.BARREL));
 
     public static class SaltyAirBlock extends AirBlock { public SaltyAirBlock(Settings settings) { super(settings); } }
@@ -101,9 +97,7 @@ public final class BlocksRegistry {
         registerBlock(WAXED_EXPOSED_COPPER_BASIN, "waxed_exposed_copper_basin", Sandwichable.SANDWICHABLE_ITEMS);
         registerBlock(WAXED_WEATHERED_COPPER_BASIN, "waxed_weathered_copper_basin", Sandwichable.SANDWICHABLE_ITEMS);
         registerBlock(WAXED_OXIDIZED_COPPER_BASIN, "waxed_oxidized_copper_basin", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(SHRUB, "shrub", Sandwichable.SANDWICHABLE_ITEMS);
         registerBlock(BOTTLE_CRATE, "bottle_crate", Sandwichable.SANDWICHABLE_ITEMS);
-        registerBlock(POTTED_SHRUB, "potted_shrub");
         registerBlock(PICKLE_JAR, "pickle_jar");
 
         registerBlock(SALTY_AIR, "salty_air");

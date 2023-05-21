@@ -1,7 +1,6 @@
 package io.github.foundationgames.sandwichable;
 
 import io.github.foundationgames.sandwichable.blocks.BlocksRegistry;
-import io.github.foundationgames.sandwichable.blocks.ShrubBlock;
 import io.github.foundationgames.sandwichable.blocks.entity.container.BottleCrateScreenHandler;
 import io.github.foundationgames.sandwichable.blocks.entity.container.DesalinatorScreenHandler;
 import io.github.foundationgames.sandwichable.blocks.entity.container.screen.BottleCrateScreen;
@@ -33,9 +32,7 @@ import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredica
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
-import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
@@ -65,8 +62,6 @@ public class SandwichableClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(PickleJarBlockEntityRenderer.CucumberModel.MODEL_LAYER, PickleJarBlockEntityRenderer.CucumberModel::createModelData);
         EntityModelLayerRegistry.registerModelLayer(PickleJarBlockEntityRenderer.FluidModel.MODEL_LAYER, PickleJarBlockEntityRenderer.FluidModel::createModelData);
 
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> !state.get(ShrubBlock.SNIPPED) ? BiomeColors.getGrassColor(view, pos) : FoliageColors.getDefaultColor(), BlocksRegistry.SHRUB, BlocksRegistry.POTTED_SHRUB);
-
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
             if (tintIndex != 0) {
                 return -1;
@@ -78,8 +73,6 @@ public class SandwichableClient implements ClientModInitializer {
             }
             return FoliageColors.getDefaultColor();
         }, BlocksRegistry.ANCIENT_GRAIN);
-
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex > 0 ? -1 : GrassColors.getColor(0.5D, 1.0D), BlocksRegistry.SHRUB.asItem());
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             if (tintIndex <= 0) {
@@ -110,8 +103,6 @@ public class SandwichableClient implements ClientModInitializer {
         ScreenRegistry.<DesalinatorScreenHandler, DesalinatorScreen>register(Sandwichable.DESALINATOR_HANDLER, DesalinatorScreen::new);
         ScreenRegistry.<BottleCrateScreenHandler, BottleCrateScreen>register(Sandwichable.BOTTLE_CRATE_HANDLER, BottleCrateScreen::new);
 
-        BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.SHRUB, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.POTTED_SHRUB, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.LETTUCE, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.CUCUMBERS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.ANCIENT_GRAIN, RenderLayer.getCutout());

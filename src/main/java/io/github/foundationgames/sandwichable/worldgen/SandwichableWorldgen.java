@@ -14,12 +14,7 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
 import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier;
@@ -28,15 +23,10 @@ import java.util.List;
 
 public class SandwichableWorldgen {
     public static final Identifier SALTY_SAND = Util.id("salty_sand");
-    public static final Identifier SHRUBS = Util.id("shrubs");
 
-    public static final Feature<DefaultFeatureConfig> SHRUBS_FEATURE = Registry.register(Registry.FEATURE, SHRUBS, new ShrubsFeature(DefaultFeatureConfig.CODEC));
     public static final Feature<OreFeatureConfig> SALTY_SAND_FEATURE = Registry.register(Registry.FEATURE, SALTY_SAND, new OreFeature(OreFeatureConfig.CODEC));
     public static final Feature<CascadeFeatureConfig> CASCADE_FEATURE = Registry.register(Registry.FEATURE, Util.id("cascade"), new CascadeFeature());
 
-    public static final PlacedFeature SHRUBS_PLACED = new PlacedFeature(
-            BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, SHRUBS, new ConfiguredFeature<>(SHRUBS_FEATURE, new DefaultFeatureConfig())), List.of()
-    );
     public static final PlacedFeature SALTY_SAND_PLACED;
     public static PlacedFeature SALT_POOL_WATER = new PlacedFeature(
             BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, Util.id("salt_pool_water"), new ConfiguredFeature<>(CASCADE_FEATURE, CascadeFeatureConfig.water())),
@@ -55,11 +45,6 @@ public class SandwichableWorldgen {
             return entry.isIn(Sandwichable.SALT_WATER_BODIES);
         }, GenerationStep.Feature.UNDERGROUND_ORES, RegistryKey.of(Registry.PLACED_FEATURE_KEY, SALTY_SAND));
 
-        BiomeModifications.addFeature(ctx -> {
-            var entry = ctx.getBiomeRegistryEntry();
-            return !entry.isIn(Sandwichable.NO_SHRUBS);
-        }, GenerationStep.Feature.VEGETAL_DECORATION, RegistryKey.of(Registry.PLACED_FEATURE_KEY, SHRUBS));
-
         if (cfg.saltPoolGenOptions.saltPools) {
             BiomeModifications.addFeature(ctx -> {
                 var entry = ctx.getBiomeRegistryEntry();
@@ -77,8 +62,6 @@ public class SandwichableWorldgen {
     }
     
     static {
-        BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, SHRUBS, SHRUBS_PLACED);
-
         SandwichableConfig config = Util.getConfig();
         
         SALTY_SAND_PLACED = new PlacedFeature(

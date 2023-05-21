@@ -67,7 +67,6 @@ public class Sandwichable implements ModInitializer {
     public static final TagKey<Block> SALT_PRODUCING_BLOCKS = TagKey.of(Registry.BLOCK_KEY, Util.id("salt_producing_blocks"));
 
     public static final TagKey<Biome> SALT_WATER_BODIES = TagKey.of(Registry.BIOME_KEY, Util.id("salt_water_bodies"));
-    public static final TagKey<Biome> NO_SHRUBS = TagKey.of(Registry.BIOME_KEY, Util.id("no_shrubs"));
     public static final TagKey<Biome> NO_SALT_POOLS = TagKey.of(Registry.BIOME_KEY, Util.id("no_salt_pools"));
 
     public static final ToastItemCriterion TOAST_ITEM = CriteriaAccessor.callRegister(new ToastItemCriterion());
