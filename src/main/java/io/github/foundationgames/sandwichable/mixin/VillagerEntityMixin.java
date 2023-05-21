@@ -17,11 +17,11 @@ public class VillagerEntityMixin {
             index = 6
     )
     private static Object[] sandwichable$addSeeds(Object[] old) {
-        Object[] items = new Object[old.length + 5];
+        Object[] items = new Object[old.length + 3];
         System.arraycopy(old, 0, items, 0, old.length);
-        items[items.length - 2] = ItemsRegistry.LETTUCE_SEEDS;
-        items[items.length - 3] = ItemsRegistry.CUCUMBER_SEEDS;
-        items[items.length - 5] = ItemsRegistry.ANCIENT_GRAIN_SEEDS;
+        items[items.length - 1] = ItemsRegistry.LETTUCE_SEEDS;
+        items[items.length - 2] = ItemsRegistry.CUCUMBER_SEEDS;
+        items[items.length - 3] = ItemsRegistry.ANCIENT_GRAIN_SEEDS;
         return items;
     }
 }
