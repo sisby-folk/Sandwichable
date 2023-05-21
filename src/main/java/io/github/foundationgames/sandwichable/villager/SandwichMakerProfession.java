@@ -48,9 +48,8 @@ public class SandwichMakerProfession {
                 SANDWICH_MAKER, Util.copyToFastUtilMap(ImmutableMap.of(
                         1,
                         new TradeOffers.Factory[]{
-                                new TradeOffers.BuyForOneEmeraldFactory(Items.WHEAT, 20, 16, 2),
-                                new TradeOffers.BuyForOneEmeraldFactory(Items.BREAD, 6, 12, 2),
-                                new TradeOffers.BuyForOneEmeraldFactory(ItemsRegistry.LETTUCE_HEAD, 14, 16, 2),
+                                new TradeOffers.BuyForOneEmeraldFactory(ItemsRegistry.LETTUCE_SEEDS, 6, 12, 2),
+                                new TradeOffers.BuyForOneEmeraldFactory(ItemsRegistry.CUCUMBER_SEEDS, 6, 12, 2),
                                 new TradeOffers.SellItemFactory(ItemsRegistry.BREAD_SLICE, 1, 10, 16, 1)
                         },
                         2,
