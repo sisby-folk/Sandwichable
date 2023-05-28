@@ -53,7 +53,7 @@ public class CascadeFeatureConfig implements FeatureConfig {
                 new SimpleBlockStateProviderExt(BlocksRegistry.SALTY_ROCKS.getDefaultState()),
                 new WeightedBlockStateProvider(new DataPool.Builder<BlockState>().add(Blocks.SAND.getDefaultState(), 3).add(BlocksRegistry.SALTY_SAND.getDefaultState(), 1)),
                 4, 6,
-                Blocks.WATER.getDefaultState(), BlocksRegistry.SALTY_STONE.getDefaultState(),
+                BlocksRegistry.PICKLE_BRINE.getDefaultState(), BlocksRegistry.SALTY_STONE.getDefaultState(),
                 new SimpleBlockStateProviderExt(Blocks.SANDSTONE.getDefaultState()),
                 new WeightedBlockStateProvider(new DataPool.Builder<BlockState>().add(Blocks.STONE.getDefaultState(), 1).add(Blocks.COBBLESTONE.getDefaultState(), 1))
         );
