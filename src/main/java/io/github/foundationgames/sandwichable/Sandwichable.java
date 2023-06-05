@@ -18,6 +18,7 @@ import io.github.foundationgames.sandwichable.items.ItemsRegistry;
 import io.github.foundationgames.sandwichable.items.SandwichableGroupIconBuilder;
 import io.github.foundationgames.sandwichable.items.spread.SpreadType;
 import io.github.foundationgames.sandwichable.recipe.SandwichableRecipes;
+import io.github.foundationgames.sandwichable.structure.SandwichableStructures;
 import io.github.foundationgames.sandwichable.util.AncientGrainType;
 import io.github.foundationgames.sandwichable.util.ExtraDispenserBehaviorRegistry;
 import io.github.foundationgames.sandwichable.util.Util;
@@ -25,10 +26,13 @@ import io.github.foundationgames.sandwichable.villager.SandwichMakerProfession;
 import io.github.foundationgames.sandwichable.worldgen.SandwichableWorldgen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.fabricmc.fabric.mixin.object.builder.CriteriaAccessor;
 import net.fabricmc.loader.api.FabricLoader;
@@ -40,21 +44,25 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.*;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.entry.LootTableEntry;
 import net.minecraft.loot.function.LootFunctionType;
-import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.village.TradeOffer;
+import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Set;
 
 public class Sandwichable implements ModInitializer {
     public static final ItemGroup SANDWICHABLE_ITEMS = FabricItemGroupBuilder.build(Util.id("sandwichable"), SandwichableGroupIconBuilder::getIcon);
@@ -133,15 +141,57 @@ public class Sandwichable implements ModInitializer {
             }
         });
 
+        UseBlockCallback.EVENT.register((player, world, hand, hit) -> {
+            BlockPos pos = hit.getBlockPos();
+            if (world.getBlockState(pos).isIn(KNIFE_SHARPENING_SURFACES)) {
+                ItemStack knife = player.getStackInHand(hand);
+                SandwichableConfig.KitchenKnifeOption opt = Util.getConfig().getKnifeOption(knife.getItem());
+                if (opt != null && KitchenKnifeItem.getSharpnessF(knife) < 1) {
+                    Vec3d hPos = hit.getPos();
+                    if (world.isClient()) {
+                        for (int i = 0; i < 4; i++) {
+                            world.addParticle(ParticleTypes.CRIT, hPos.x, hPos.y, hPos.z, (world.random.nextFloat() - 0.5) * 0.5, 0.1, (world.random.nextFloat() - 0.5) * 0.5);
+                        }
+                        return ActionResult.SUCCESS;
+                    }
+                    KitchenKnifeItem.setSharpness(knife, KitchenKnifeItem.getSharpness(knife) + 3);
+                    world.playSound(null, hPos.x, hPos.y, hPos.z, SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS, 0.7f, 1.5f + (world.random.nextFloat() * 0.2f));
+                    return ActionResult.CONSUME;
+                }
+            }
+            return ActionResult.PASS;
+        });
+
+        ServerLifecycleEvents.SERVER_STARTING.register(SandwichableStructures::addStructures);
+
+        Set<Identifier> modifiedChests = Set.of(
+                LootTables.ANCIENT_CITY_CHEST,
+                LootTables.VILLAGE_PLAINS_CHEST,
+                LootTables.VILLAGE_SAVANNA_HOUSE_CHEST,
+                LootTables.VILLAGE_SNOWY_HOUSE_CHEST,
+                LootTables.VILLAGE_TAIGA_HOUSE_CHEST,
+                LootTables.VILLAGE_DESERT_HOUSE_CHEST
+        );
+
         LootTableEvents.MODIFY.register((resources, loot, id, table, source) -> {
-            if (source.isBuiltin() && ANCIENT_CITY_LOOT.equals(id)) {
-                table.pool(LootPool.builder().with(
-                        ItemEntry.builder(ItemsRegistry.ANCIENT_GRAIN_SEEDS)
-                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1, 3)))
-                        ).rolls(UniformLootNumberProvider.create(0, 2))
-                );
+            Identifier injectId = Util.id("inject/" + id.getPath());
+            if (modifiedChests.contains(id)) {
+                table.pool(LootPool.builder().with(LootTableEntry.builder(injectId).weight(1).quality(0)).build());
             }
         });
+
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1,
+                factories -> new TradeOffer(new ItemStack(ItemsRegistry.ONION, 26),
+                        new ItemStack(Items.EMERALD), 16, 2, .05f));
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1,
+                factories -> new TradeOffer(new ItemStack(ItemsRegistry.TOMATO, 22),
+                        new ItemStack(Items.EMERALD), 16, 2, .05f));
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1,
+                factories -> new TradeOffer(new ItemStack(ItemsRegistry.CUCUMBER, 15),
+                        new ItemStack(Items.EMERALD), 16, 2, .05f));
+        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1,
+                factories -> new TradeOffer(new ItemStack(ItemsRegistry.LETTUCE_HEAD, 15),
+                        new ItemStack(Items.EMERALD), 16, 2, .05f));
 
         if(FabricLoader.getInstance().isModLoaded("croptopia")) {
             CroptopiaCompat.init();
