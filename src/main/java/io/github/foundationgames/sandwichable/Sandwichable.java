@@ -27,7 +27,6 @@ import io.github.foundationgames.sandwichable.worldgen.SandwichableWorldgen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -47,7 +46,6 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.LootTableEntry;
 import net.minecraft.loot.function.LootFunctionType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.TagKey;
@@ -141,27 +139,6 @@ public class Sandwichable implements ModInitializer {
             }
         });
 
-        UseBlockCallback.EVENT.register((player, world, hand, hit) -> {
-            BlockPos pos = hit.getBlockPos();
-            if (world.getBlockState(pos).isIn(KNIFE_SHARPENING_SURFACES)) {
-                ItemStack knife = player.getStackInHand(hand);
-                SandwichableConfig.KitchenKnifeOption opt = Util.getConfig().getKnifeOption(knife.getItem());
-                if (opt != null && KitchenKnifeItem.getSharpnessF(knife) < 1) {
-                    Vec3d hPos = hit.getPos();
-                    if (world.isClient()) {
-                        for (int i = 0; i < 4; i++) {
-                            world.addParticle(ParticleTypes.CRIT, hPos.x, hPos.y, hPos.z, (world.random.nextFloat() - 0.5) * 0.5, 0.1, (world.random.nextFloat() - 0.5) * 0.5);
-                        }
-                        return ActionResult.SUCCESS;
-                    }
-                    KitchenKnifeItem.setSharpness(knife, KitchenKnifeItem.getSharpness(knife) + 3);
-                    world.playSound(null, hPos.x, hPos.y, hPos.z, SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS, 0.7f, 1.5f + (world.random.nextFloat() * 0.2f));
-                    return ActionResult.CONSUME;
-                }
-            }
-            return ActionResult.PASS;
-        });
-
         ServerLifecycleEvents.SERVER_STARTING.register(SandwichableStructures::addStructures);
 
         Set<Identifier> modifiedChests = Set.of(
@@ -180,12 +157,6 @@ public class Sandwichable implements ModInitializer {
             }
         });
 
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1,
-                factories -> new TradeOffer(new ItemStack(ItemsRegistry.ONION, 26),
-                        new ItemStack(Items.EMERALD), 16, 2, .05f));
-        TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1,
-                factories -> new TradeOffer(new ItemStack(ItemsRegistry.TOMATO, 22),
-                        new ItemStack(Items.EMERALD), 16, 2, .05f));
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 1,
                 factories -> new TradeOffer(new ItemStack(ItemsRegistry.CUCUMBER, 15),
                         new ItemStack(Items.EMERALD), 16, 2, .05f));
