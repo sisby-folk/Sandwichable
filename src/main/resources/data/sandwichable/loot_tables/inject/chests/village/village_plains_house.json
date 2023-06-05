@@ -19,21 +19,7 @@
 							}
 						}
 					],
-					"name": "sandwichable:onion_seeds"
-				},
-				{
-					"type": "minecraft:item",
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"min": 1.0,
-								"max": 3.0,
-								"type": "minecraft:uniform"
-							}
-						}
-					],
-					"name": "sandwichable:tomato_seeds"
+					"name": "sandwichable:lettuce_seeds"
 				}
 			]
 		}
