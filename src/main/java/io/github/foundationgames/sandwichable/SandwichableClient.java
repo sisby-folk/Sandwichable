@@ -1,17 +1,11 @@
 package io.github.foundationgames.sandwichable;
 
 import io.github.foundationgames.sandwichable.blocks.BlocksRegistry;
-import io.github.foundationgames.sandwichable.blocks.ShrubBlock;
 import io.github.foundationgames.sandwichable.blocks.entity.container.BottleCrateScreenHandler;
 import io.github.foundationgames.sandwichable.blocks.entity.container.DesalinatorScreenHandler;
 import io.github.foundationgames.sandwichable.blocks.entity.container.screen.BottleCrateScreen;
 import io.github.foundationgames.sandwichable.blocks.entity.container.screen.DesalinatorScreen;
-import io.github.foundationgames.sandwichable.blocks.entity.renderer.BasinBlockEntityRenderer;
-import io.github.foundationgames.sandwichable.blocks.entity.renderer.CuttingBoardBlockEntityRenderer;
-import io.github.foundationgames.sandwichable.blocks.entity.renderer.PickleJarBlockEntityRenderer;
-import io.github.foundationgames.sandwichable.blocks.entity.renderer.SandwichBlockEntityRenderer;
-import io.github.foundationgames.sandwichable.blocks.entity.renderer.SandwichTableBlockEntityRenderer;
-import io.github.foundationgames.sandwichable.blocks.entity.renderer.ToasterBlockEntityRenderer;
+import io.github.foundationgames.sandwichable.blocks.entity.renderer.*;
 import io.github.foundationgames.sandwichable.entity.EntitiesRegistry;
 import io.github.foundationgames.sandwichable.entity.SandwichTableMinecartEntity;
 import io.github.foundationgames.sandwichable.entity.render.SandwichTableMinecartEntityRenderer;
@@ -37,16 +31,13 @@ import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredica
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
-import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -56,8 +47,8 @@ import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockRenderView;
-import net.minecraft.world.World;
 
 import java.util.function.Function;
 
@@ -66,7 +57,6 @@ public class SandwichableClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockEntityRendererRegistry.register(BlocksRegistry.SANDWICHTABLE_BLOCKENTITY, SandwichTableBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(BlocksRegistry.SANDWICH_BLOCKENTITY, SandwichBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(BlocksRegistry.CUTTINGBOARD_BLOCKENTITY, CuttingBoardBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(BlocksRegistry.TOASTER_BLOCKENTITY, ToasterBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(BlocksRegistry.BASIN_BLOCKENTITY, BasinBlockEntityRenderer::new);
         BlockEntityRendererRegistry.register(BlocksRegistry.PICKLEJAR_BLOCKENTITY, PickleJarBlockEntityRenderer::new);
@@ -74,8 +64,6 @@ public class SandwichableClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(BasinBlockEntityRenderer.BasinContentModel.MODEL_LAYER, BasinBlockEntityRenderer.BasinContentModel::createModelData);
         EntityModelLayerRegistry.registerModelLayer(PickleJarBlockEntityRenderer.CucumberModel.MODEL_LAYER, PickleJarBlockEntityRenderer.CucumberModel::createModelData);
         EntityModelLayerRegistry.registerModelLayer(PickleJarBlockEntityRenderer.FluidModel.MODEL_LAYER, PickleJarBlockEntityRenderer.FluidModel::createModelData);
-
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> !state.get(ShrubBlock.SNIPPED) ? BiomeColors.getGrassColor(view, pos) : FoliageColors.getDefaultColor(), BlocksRegistry.SHRUB, BlocksRegistry.POTTED_SHRUB);
 
         ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
             if (tintIndex != 0) {
@@ -88,8 +76,6 @@ public class SandwichableClient implements ClientModInitializer {
             }
             return FoliageColors.getDefaultColor();
         }, BlocksRegistry.ANCIENT_GRAIN);
-
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex > 0 ? -1 : GrassColors.getColor(0.5D, 1.0D), BlocksRegistry.SHRUB.asItem());
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
             if (tintIndex <= 0) {
@@ -120,13 +106,9 @@ public class SandwichableClient implements ClientModInitializer {
         ScreenRegistry.<DesalinatorScreenHandler, DesalinatorScreen>register(Sandwichable.DESALINATOR_HANDLER, DesalinatorScreen::new);
         ScreenRegistry.<BottleCrateScreenHandler, BottleCrateScreen>register(Sandwichable.BOTTLE_CRATE_HANDLER, BottleCrateScreen::new);
 
-        BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.SHRUB, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.POTTED_SHRUB, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.LETTUCE, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.TOMATOES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.CUCUMBERS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.ANCIENT_GRAIN, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.ONIONS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(BlocksRegistry.PICKLE_JAR, RenderLayer.getCutout());
 
         EntityRendererRegistry.register(EntitiesRegistry.SANDWICH_TABLE_MINECART, SandwichTableMinecartEntityRenderer::new);
@@ -137,25 +119,6 @@ public class SandwichableClient implements ClientModInitializer {
             client.execute(() -> {
                 if(e instanceof SandwichTableMinecartEntity) {
                     ((SandwichTableMinecartEntity)e).readSandwichTableData(tag);
-                }
-            });
-        });
-
-        ClientPlayNetworking.registerGlobalReceiver(Util.id("cutting_board_particles"), (client, handler, buf, responseSender) -> {
-            ItemStack stack = buf.readItemStack();
-            int top = buf.readInt();
-            int layers = buf.readInt();
-            BlockPos pos = buf.readBlockPos();
-            Random random = client.world.getRandom();
-            World world = MinecraftClient.getInstance().world;
-            client.execute(() -> {
-                for (int i = 0; i < layers; i++) {
-                    for (int j = 0; j < 2 + random.nextInt(2); j++) {
-                        double x = pos.getX() + 0.5 + ((random.nextDouble() - 0.5) / 3);
-                        double y = pos.getY() + 0.094 + ((top - i) * 0.03124);
-                        double z = pos.getZ() + 0.5 + ((random.nextDouble() - 0.5) / 3);
-                        world.addParticle(new ItemStackParticleEffect(ParticleTypes.ITEM, stack), x, y, z, 0, (random.nextDouble() + 1.0) * 0.066, 0);
-                    }
                 }
             });
         });

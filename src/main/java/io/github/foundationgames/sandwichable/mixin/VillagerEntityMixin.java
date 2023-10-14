@@ -18,14 +18,10 @@ public class VillagerEntityMixin {
 
     static {
         var items = new HashSet<>(GATHERABLE_ITEMS);
-        items.add(ItemsRegistry.TOMATO_SEEDS);
-        items.add(ItemsRegistry.TOMATO);
         items.add(ItemsRegistry.LETTUCE_SEEDS);
         items.add(ItemsRegistry.LETTUCE_HEAD);
         items.add(ItemsRegistry.CUCUMBER_SEEDS);
         items.add(ItemsRegistry.CUCUMBER);
-        items.add(ItemsRegistry.ONION_SEEDS);
-        items.add(ItemsRegistry.ONION);
         items.add(ItemsRegistry.ANCIENT_GRAIN_SEEDS);
         GATHERABLE_ITEMS = ImmutableSet.copyOf(items);
     }

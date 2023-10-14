@@ -17,9 +17,7 @@ public class CommonTags {
     public static final TagKey<Item> PICKLE_CHIPS = t("pickle_chips");
     public static final TagKey<Item> ONION = t("onion");
     public static final TagKey<Item> CHOPPED_ONION = t("chopped_onion");
-    public static final TagKey<Item> TOMATO_SEEDS = t("tomato_seeds");
     public static final TagKey<Item> LETTUCE_SEEDS = t("lettuce_seeds");
-    public static final TagKey<Item> ONION_SEEDS = t("onion_seeds");
     public static final TagKey<Item> CUCUMBER_SEEDS = t("cucumber_seeds");
     public static final TagKey<Item> SALT = t("salt");
     public static final TagKey<Item> SALT_ROCK = t("salt_rock");

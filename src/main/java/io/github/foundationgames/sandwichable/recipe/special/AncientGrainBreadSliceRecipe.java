@@ -1,19 +1,21 @@
 package io.github.foundationgames.sandwichable.recipe.special;
 
+import com.nhoryzon.mc.farmersdelight.registry.TagsRegistry;
 import io.github.foundationgames.sandwichable.items.BiomeVariantItem;
 import io.github.foundationgames.sandwichable.items.ItemsRegistry;
-import io.github.foundationgames.sandwichable.recipe.CuttingRecipe;
 import io.github.foundationgames.sandwichable.recipe.SandwichableRecipes;
-import net.minecraft.inventory.SimpleInventory;
+import io.github.foundationgames.sandwichable.recipe.SpecialCuttingBoardRecipe;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
-public class AncientGrainBreadSliceRecipe extends CuttingRecipe.Special {
+public class AncientGrainBreadSliceRecipe extends SpecialCuttingBoardRecipe {
     public AncientGrainBreadSliceRecipe(Identifier id) {
-        super(id);
+        super(id, "", Ingredient.fromTag(TagsRegistry.KNIVES), "");
     }
 
     @Override
@@ -22,7 +24,7 @@ public class AncientGrainBreadSliceRecipe extends CuttingRecipe.Special {
     }
 
     @Override
-    public ItemStack craft(SimpleInventory inv, DynamicRegistryManager registryManager) {
+    public ItemStack craft(Inventory inv, DynamicRegistryManager registryManager) {
         var stack = getOutput(registryManager);
         BiomeVariantItem.copyBiome(inv.getStack(0), stack);
 
@@ -30,7 +32,7 @@ public class AncientGrainBreadSliceRecipe extends CuttingRecipe.Special {
     }
 
     @Override
-    public boolean matches(SimpleInventory inv, World world) {
+    public boolean matches(Inventory inv, World world) {
         return inv.getStack(0).isOf(ItemsRegistry.ANCIENT_GRAIN_BREAD);
     }
 

@@ -3,5 +3,5 @@
 	"input": {
 		"tag": "c:salmon_filet"
 	},
-	"output": "sandwichable:cooked_salmon_filet"
+	"output": "farmersdelight:cooked_salmon_slice"
 }

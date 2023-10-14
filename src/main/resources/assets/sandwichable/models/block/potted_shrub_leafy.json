@@ -1,7 +1,0 @@
-{
-    "parent": "sandwichable:block/flower_pot_cross_overlay",
-    "textures": {
-        "plant": "sandwichable:block/shrub_base",
-		"overlay": "sandwichable:block/shrub_leaves"
-    }
-}

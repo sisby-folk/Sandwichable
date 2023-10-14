@@ -11,7 +11,7 @@ public class SandwichableGroupIconBuilder {
         DefaultedList<ItemStack> sandwichlist = DefaultedList.ofSize(128, ItemStack.EMPTY);
         ItemStack groupIcon = new ItemStack(BlocksRegistry.SANDWICH.asItem());
         sandwichlist.set(0, new ItemStack(ItemsRegistry.CHEESE_SLICE_REGULAR));
-        sandwichlist.set(1, new ItemStack(ItemsRegistry.BACON_STRIPS));
+        sandwichlist.set(1, new ItemStack(com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry.COOKED_BACON.get()));
         sandwichlist.set(2, new ItemStack(ItemsRegistry.LETTUCE_LEAF));
         sandwichlist.set(3, new ItemStack(ItemsRegistry.TOMATO_SLICE));
         sandwichlist.set(4, new ItemStack(ItemsRegistry.TOASTED_BREAD_SLICE));

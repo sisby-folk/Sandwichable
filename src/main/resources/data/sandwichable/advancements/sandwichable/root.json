@@ -2,7 +2,7 @@
   "display": {
     "icon": {
       "item": "sandwichable:sandwich",
-	  "nbt": "{BlockEntityTag:{Items:[{id:\"sandwichable:cheese_slice\",Count:1b},{id:\"sandwichable:bacon_strips\",Count:1b},{id:\"sandwichable:lettuce_leaf\",Count:1b},{id:\"sandwichable:tomato_slice\",Count:1b},{id:\"sandwichable:toasted_bread_slice\",Count:1b}]}}"
+	  "nbt": "{BlockEntityTag:{Items:[{id:\"sandwichable:cheese_slice\",Count:1b},{id:\"farmersdelight:cooked_bacon\",Count:1b},{id:\"sandwichable:lettuce_leaf\",Count:1b},{id:\"sandwichable:tomato_slice\",Count:1b},{id:\"sandwichable:toasted_bread_slice\",Count:1b}]}}"
     },
     "title": {
       "translate": "advancements.sandwichable.root.title"
@@ -28,23 +28,11 @@
             "items": ["sandwichable:sandwich_table"]
           },
 		  {
-            "items": ["sandwichable:tomato_seeds"]
-          },
-		  {
             "items": ["sandwichable:lettuce_seeds"]
           },
 		  {
-            "items": ["sandwichable:onion_seeds"]
-          },
-		  {
             "items": ["sandwichable:cucumber_seeds"]
-          },
-		  {
-            "items": ["sandwichable:shrub"]
-          },
-		  {
-			"tag": "sandwichable:cutting_boards"
-		  }
+          }
         ]
       }
     }

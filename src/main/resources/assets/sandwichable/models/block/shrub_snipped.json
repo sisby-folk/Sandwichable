@@ -1,6 +1,0 @@
-{
-	"parent": "block/cross",
-	"textures": {
-		"cross": "sandwichable:block/shrub_snipped"
-	}
-}

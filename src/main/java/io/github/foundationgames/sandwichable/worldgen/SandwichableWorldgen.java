@@ -17,9 +17,7 @@ import net.minecraft.world.gen.feature.Feature;
 
 public class SandwichableWorldgen {
     public static final Identifier SALTY_SAND = Util.id("salty_sand");
-    public static final Identifier SHRUBS = Util.id("shrubs");
 
-    public static final Feature<DefaultFeatureConfig> SHRUBS_FEATURE = Registry.register(Registries.FEATURE, SHRUBS, new ShrubsFeature(DefaultFeatureConfig.CODEC));
     public static final Feature<CascadeFeatureConfig> CASCADE_FEATURE = Registry.register(Registries.FEATURE, Util.id("cascade"), new CascadeFeature());
 
     public static void init() {
@@ -31,11 +29,6 @@ public class SandwichableWorldgen {
                 return entry.isIn(Sandwichable.SALT_WATER_BODIES);
             }, GenerationStep.Feature.UNDERGROUND_ORES, RegistryKey.of(RegistryKeys.PLACED_FEATURE, SALTY_SAND));
         }
-
-        BiomeModifications.addFeature(ctx -> {
-            var entry = ctx.getBiomeRegistryEntry();
-            return !entry.isIn(Sandwichable.NO_SHRUBS);
-        }, GenerationStep.Feature.VEGETAL_DECORATION, RegistryKey.of(RegistryKeys.PLACED_FEATURE, SHRUBS));
 
         if (cfg.saltPoolGenOptions.saltPools) {
             BiomeModifications.addFeature(ctx -> {

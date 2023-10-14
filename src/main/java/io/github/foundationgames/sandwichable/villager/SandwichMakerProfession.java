@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import io.github.foundationgames.sandwichable.blocks.BlocksRegistry;
 import io.github.foundationgames.sandwichable.items.ItemsRegistry;
 import io.github.foundationgames.sandwichable.util.Util;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.villager.VillagerProfessionBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.entity.Entity;
@@ -18,7 +19,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.village.TradeOffer;
@@ -52,7 +52,6 @@ public class SandwichMakerProfession {
                         new TradeOffers.Factory[]{
                                 new TradeOffers.BuyForOneEmeraldFactory(Items.WHEAT, 20, 16, 2),
                                 new TradeOffers.BuyForOneEmeraldFactory(Items.BREAD, 6, 12, 2),
-                                new TradeOffers.BuyForOneEmeraldFactory(ItemsRegistry.TOMATO, 18, 16, 2),
                                 new TradeOffers.BuyForOneEmeraldFactory(ItemsRegistry.LETTUCE_HEAD, 14, 16, 2),
                                 new TradeOffers.SellItemFactory(ItemsRegistry.BREAD_SLICE, 1, 10, 16, 1)
                         },
@@ -131,13 +130,13 @@ public class SandwichMakerProfession {
 
     public enum SellableSandwiches {
         APPLE(new Item[]{Items.BREAD, Items.APPLE, Items.BREAD}),
-        BACON_LETTUCE_TOMATO(new Item[]{ItemsRegistry.BREAD_SLICE, ItemsRegistry.BACON_STRIPS, ItemsRegistry.LETTUCE_LEAF, ItemsRegistry.TOMATO_SLICE, ItemsRegistry.BREAD_SLICE}),
+        BACON_LETTUCE_TOMATO(new Item[]{ItemsRegistry.BREAD_SLICE, com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry.COOKED_BACON.get(), ItemsRegistry.LETTUCE_LEAF, ItemsRegistry.TOMATO_SLICE, ItemsRegistry.BREAD_SLICE}),
         CHICKEN_CHEESE(new Item[]{ItemsRegistry.TOASTED_BREAD_SLICE, ItemsRegistry.CHEESE_SLICE_REGULAR, Items.COOKED_CHICKEN, ItemsRegistry.LETTUCE_LEAF, ItemsRegistry.TOASTED_BREAD_SLICE}),
-        MEAT_LOVERS(new Item[]{Items.BREAD, ItemsRegistry.BACON_STRIPS, Items.COOKED_BEEF, Items.COOKED_CHICKEN, Items.COOKED_PORKCHOP, Items.BREAD}),
+        MEAT_LOVERS(new Item[]{Items.BREAD, com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry.COOKED_BACON.get(), Items.COOKED_BEEF, Items.COOKED_CHICKEN, Items.COOKED_PORKCHOP, Items.BREAD}),
         VEGETABLE(new Item[]{Items.BREAD, ItemsRegistry.LETTUCE_LEAF, Items.CARROT, Items.BEETROOT, Items.BAKED_POTATO, ItemsRegistry.TOMATO_SLICE, Items.BREAD}),
         GOLDEN_APPLE(new Item[]{Items.BREAD, Items.GOLDEN_APPLE, Items.BREAD});
 
-        Item[] items;
+        final Item[] items;
 
         SellableSandwiches(Item[] items) {
             this.items = items;

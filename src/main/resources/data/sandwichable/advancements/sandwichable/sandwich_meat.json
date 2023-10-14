@@ -3,7 +3,7 @@
   "display": {
     "icon": {
       "item": "sandwichable:sandwich",
-	  "nbt": "{BlockEntityTag:{Items:[{id:\"sandwichable:bacon_strips\",Count:1b},{id:\"sandwichable:cooked_pork_cuts\",Count:1b},{id:\"sandwichable:chicken_filet\",Count:1b},{id:\"sandwichable:toasted_bread_slice\",Count:1b}]}}"
+	  "nbt": "{BlockEntityTag:{Items:[{id:\"farmersdelight:cooked_bacon\",Count:1b},{id:\"farmersdelight:cooked_bacon\",Count:1b},{id:\"farmersdelight:chicken_cuts\",Count:1b},{id:\"sandwichable:toasted_bread_slice\",Count:1b}]}}"
     },
     "title": {
       "translate": "advancements.sandwichable.sandwich_meat.title"
@@ -22,19 +22,19 @@
       "conditions": {
         "foods": [
           {
-            "items": ["sandwichable:cooked_pork_cuts"]
+            "items": ["farmersdelight:cooked_bacon"]
           },
 		  {
-            "items": ["sandwichable:bacon_strips"]
+            "items": ["farmersdelight:cooked_bacon"]
           },
 		  {
-            "items": ["sandwichable:cooked_chicken_filet"]
+            "items": ["farmersdelight:cooked_chicken_cuts"]
           },
 		  {
-            "items": ["sandwichable:cooked_cod_filet"]
+            "items": ["farmersdelight:cooked_cod_slice"]
           },
 		  {
-            "items": ["sandwichable:cooked_salmon_filet"]
+            "items": ["farmersdelight:cooked_salmon_slice"]
           }
         ]
       }

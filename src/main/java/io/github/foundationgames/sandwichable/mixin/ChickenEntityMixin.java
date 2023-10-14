@@ -20,10 +20,8 @@ public class ChickenEntityMixin {
         for (var stack : BREEDING_INGREDIENT.getMatchingStacks()) {
             items.add(stack.getItem());
         }
-        items.add(ItemsRegistry.TOMATO_SEEDS);
         items.add(ItemsRegistry.LETTUCE_SEEDS);
         items.add(ItemsRegistry.CUCUMBER_SEEDS);
-        items.add(ItemsRegistry.ONION_SEEDS);
         items.add(ItemsRegistry.ANCIENT_GRAIN_SEEDS);
 
         var itemArray = new ItemConvertible[items.size()];
