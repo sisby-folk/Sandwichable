@@ -27,7 +27,7 @@
     "min_disc_size": 4,
     "max_disc_size": 6,
     "pool": {
-      "Name": "minecraft:water"
+      "Name": "sandwichable:pickle_brine"
     },
     "floor": {
       "Name": "sandwichable:salty_stone"

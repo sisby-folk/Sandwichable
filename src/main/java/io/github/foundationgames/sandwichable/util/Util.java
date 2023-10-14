@@ -5,6 +5,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github.foundationgames.sandwichable.blocks.entity.SyncedBlockEntity;
 import io.github.foundationgames.sandwichable.config.ConfigInABarrel;
 import io.github.foundationgames.sandwichable.config.SandwichableConfig;
+import io.github.foundationgames.sandwichable.mixin.StructurePoolAccess;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;

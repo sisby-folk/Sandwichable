@@ -24,7 +24,7 @@ public class SandwichableEMI implements EmiPlugin {
 		registry.addWorkstation(TOASTING_CATEGORY, EmiStack.of(new ItemStack(BlocksRegistry.TOASTER).getItem()));
 		registry.getRecipeManager().listAllOfType(SandwichableRecipes.TOASTING_RECIPE).forEach((toastingRecipe -> {
 			if (!(toastingRecipe instanceof ToastedAncientGrainBreadSliceRecipe)) {
-				registry.addRecipe(new EmiToastingRecipe(toastingRecipe.getId(), toastingRecipe.getInput(), toastingRecipe.getOutput()));
+				registry.addRecipe(new EmiToastingRecipe(toastingRecipe.getId(), toastingRecipe.getInput(), toastingRecipe.getOutput(null)));
 			}
 		}));
 		registry.addRecipe(new EmiCraftingRecipe(List.of(EmiStack.of(ItemsRegistry.ANCIENT_GRAIN.getDefaultStack()), EmiStack.of(ItemsRegistry.ANCIENT_GRAIN.getDefaultStack()), EmiStack.of(ItemsRegistry.ANCIENT_GRAIN.getDefaultStack())), EmiStack.of(ItemsRegistry.ANCIENT_GRAIN_BREAD.getDefaultStack()), Util.id("crafting_special_ancientgrainbread"), true));

@@ -10,11 +10,9 @@ import com.nhoryzon.mc.farmersdelight.registry.TagsRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.registry.Registry;
 
 public class CuttingRecipeSerializer extends CuttingBoardRecipeSerializer {
     public static final CuttingRecipeSerializer INSTANCE = new CuttingRecipeSerializer();

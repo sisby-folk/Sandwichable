@@ -19,14 +19,12 @@ import io.github.foundationgames.sandwichable.items.ItemsRegistry;
 import io.github.foundationgames.sandwichable.items.SandwichableGroupIconBuilder;
 import io.github.foundationgames.sandwichable.items.spread.SpreadType;
 import io.github.foundationgames.sandwichable.recipe.SandwichableRecipes;
-import io.github.foundationgames.sandwichable.structure.SandwichableStructures;
 import io.github.foundationgames.sandwichable.util.AncientGrainType;
 import io.github.foundationgames.sandwichable.util.ExtraDispenserBehaviorRegistry;
 import io.github.foundationgames.sandwichable.util.Util;
 import io.github.foundationgames.sandwichable.villager.SandwichMakerProfession;
 import io.github.foundationgames.sandwichable.worldgen.SandwichableWorldgen;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -34,8 +32,8 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
-import net.fabricmc.fabric.mixin.object.builder.CriteriaAccessor;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
@@ -51,25 +49,17 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.LootTableEntry;
 import net.minecraft.loot.function.LootFunctionType;
-import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.tag.TagKey;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -96,9 +86,9 @@ public class Sandwichable implements ModInitializer {
     public static final TagKey<Biome> SALT_WATER_BODIES = TagKey.of(RegistryKeys.BIOME, Util.id("salt_water_bodies"));
     public static final TagKey<Biome> NO_SALT_POOLS = TagKey.of(RegistryKeys.BIOME, Util.id("no_salt_pools"));
 
-    public static final ToastItemCriterion TOAST_ITEM = CriteriaAccessor.callRegister(new ToastItemCriterion());
-    public static final UseBottleCrateCriterion USE_BOTTLE_CRATE = CriteriaAccessor.callRegister(new UseBottleCrateCriterion());
-    public static final CollectSandwichCriterion COLLECT_SANDWICH = CriteriaAccessor.callRegister(new CollectSandwichCriterion());
+    public static final ToastItemCriterion TOAST_ITEM = Criteria.register(new ToastItemCriterion());
+    public static final UseBottleCrateCriterion USE_BOTTLE_CRATE = Criteria.register(new UseBottleCrateCriterion());
+    public static final CollectSandwichCriterion COLLECT_SANDWICH = Criteria.register(new CollectSandwichCriterion());
 
     public static final SoundEvent DESALINATOR_START = Registry.register(Registries.SOUND_EVENT, Util.id("desalinator_start"), SoundEvent.of(Util.id("desalinator_start")));
     public static final SoundEvent DESALINATOR_RUN = Registry.register(Registries.SOUND_EVENT, Util.id("desalinator_run"), SoundEvent.of(Util.id("desalinator_run")));
@@ -162,8 +152,6 @@ public class Sandwichable implements ModInitializer {
                 return defaultBehavior.dispense(pointer, stack);
             }
         });
-
-        ServerLifecycleEvents.SERVER_STARTING.register(SandwichableStructures::addStructures);
 
         Set<Identifier> modifiedChests = Set.of(
                 LootTables.ANCIENT_CITY_CHEST,

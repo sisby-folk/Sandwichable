@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableBiMap;
 import io.github.foundationgames.sandwichable.Sandwichable;
 import io.github.foundationgames.sandwichable.blocks.entity.BasinBlockEntity;
 import io.github.foundationgames.sandwichable.blocks.entity.BottleCrateBlockEntity;
-import io.github.foundationgames.sandwichable.blocks.entity.CuttingBoardBlockEntity;
 import io.github.foundationgames.sandwichable.blocks.entity.DesalinatorBlockEntity;
 import io.github.foundationgames.sandwichable.blocks.entity.PickleJarBlockEntity;
 import io.github.foundationgames.sandwichable.blocks.entity.SandwichBlockEntity;
@@ -17,7 +16,6 @@ import io.github.foundationgames.sandwichable.items.ItemGroupQueue;
 import io.github.foundationgames.sandwichable.util.Util;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AirBlock;
@@ -128,10 +126,10 @@ public final class BlocksRegistry {
 
         registerBlock(PICKLE_BRINE, "pickle_brine");
 
-        SANDWICHTABLE_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("sandwich_table_ent"), FabricBlockEntityTypeBuilder.create(SandwichTableBlockEntity::new, SANDWICH_TABLE).build(null));
-        SANDWICH_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("sandwich_ent"), FabricBlockEntityTypeBuilder.create(SandwichBlockEntity::new, SANDWICH).build(null));
-        TOASTER_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("toaster_ent"), FabricBlockEntityTypeBuilder.create(ToasterBlockEntity::new, TOASTER).build(null));
-        BASIN_BLOCKENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Util.id("basin_ent"), FabricBlockEntityTypeBuilder.create(BasinBlockEntity::new,
+        SANDWICHTABLE_BLOCKENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Util.id("sandwich_table_ent"), FabricBlockEntityTypeBuilder.create(SandwichTableBlockEntity::new, SANDWICH_TABLE).build(null));
+        SANDWICH_BLOCKENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Util.id("sandwich_ent"), FabricBlockEntityTypeBuilder.create(SandwichBlockEntity::new, SANDWICH).build(null));
+        TOASTER_BLOCKENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Util.id("toaster_ent"), FabricBlockEntityTypeBuilder.create(ToasterBlockEntity::new, TOASTER).build(null));
+        BASIN_BLOCKENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Util.id("basin_ent"), FabricBlockEntityTypeBuilder.create(BasinBlockEntity::new,
                 ANDESITE_BASIN, GRANITE_BASIN, DIORITE_BASIN, BASALT_BASIN, BLACKSTONE_BASIN, DEEPSLATE_BASIN, COPPER_BASIN, EXPOSED_COPPER_BASIN, WEATHERED_COPPER_BASIN, OXIDIZED_COPPER_BASIN, WAXED_COPPER_BASIN, WAXED_EXPOSED_COPPER_BASIN, WAXED_WEATHERED_COPPER_BASIN, WAXED_OXIDIZED_COPPER_BASIN
         ).build(null));
         PICKLEJAR_BLOCKENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE, Util.id("pickle_jar_ent"), FabricBlockEntityTypeBuilder.create(PickleJarBlockEntity::new, PICKLE_JAR).build(null));
