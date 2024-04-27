@@ -7,7 +7,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.util.Identifier;
 
-public class GenericSpecialRecipeSerializer <I extends Inventory, R extends Recipe<I>> implements RecipeSerializer<R> {
+public class GenericSpecialRecipeSerializer<I extends Inventory, R extends Recipe<I>> implements RecipeSerializer<R> {
     private final GenericSpecialRecipeSerializer.Factory<I, R> factory;
 
     public GenericSpecialRecipeSerializer(GenericSpecialRecipeSerializer.Factory<I, R> factory) {

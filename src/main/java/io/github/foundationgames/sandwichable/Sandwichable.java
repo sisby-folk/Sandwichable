@@ -165,7 +165,7 @@ public class Sandwichable implements ModInitializer {
         LootTableEvents.MODIFY.register((resources, loot, id, table, source) -> {
             Identifier injectId = Util.id("inject/" + id.getPath());
             if (modifiedChests.contains(id)) {
-                table.pool(LootPool.builder().with(LootTableEntry.builder(injectId).weight(1).quality(0)).build());
+                table.pool(LootPool.builder().with(LootTableEntry.builder(injectId).weight(1).quality(0)));
             }
         });
 

@@ -5,7 +5,6 @@ import io.github.foundationgames.sandwichable.recipe.special.AncientGrainBreadSl
 import io.github.foundationgames.sandwichable.recipe.special.GenericSpecialRecipeSerializer;
 import io.github.foundationgames.sandwichable.recipe.special.ToastedAncientGrainBreadSliceRecipe;
 import io.github.foundationgames.sandwichable.util.Util;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SpecialRecipeSerializer;
@@ -17,8 +16,8 @@ public class SandwichableRecipes {
 
     public static final SpecialRecipeSerializer<AncientGrainBreadRecipe> ANCIENT_GRAIN_BREAD = Registry.register(
             Registries.RECIPE_SERIALIZER, Util.id("crafting_special_ancientgrainbread"), new SpecialRecipeSerializer<>(AncientGrainBreadRecipe::new));
-    public static final GenericSpecialRecipeSerializer<Inventory, AncientGrainBreadSliceRecipe> ANCIENT_GRAIN_BREAD_SLICE = Registry.register(
-            Registries.RECIPE_SERIALIZER, Util.id("cutting_special_ancientgrainbreadslice"), new GenericSpecialRecipeSerializer<>(AncientGrainBreadSliceRecipe::new));
+    public static final AncientGrainBreadSliceRecipe.AncientGrainBreadSliceRecipeSerializer ANCIENT_GRAIN_BREAD_SLICE = Registry.register(
+            Registries.RECIPE_SERIALIZER, Util.id("cutting_special_ancientgrainbreadslice"), new AncientGrainBreadSliceRecipe.AncientGrainBreadSliceRecipeSerializer());
     public static final GenericSpecialRecipeSerializer<SimpleInventory, ToastedAncientGrainBreadSliceRecipe> TOASTED_ANCIENT_GRAIN_BREAD_SLICE = Registry.register(
             Registries.RECIPE_SERIALIZER, Util.id("toasting_special_toastedancientgrainbreadslice"), new GenericSpecialRecipeSerializer<>(ToastedAncientGrainBreadSliceRecipe::new));
 

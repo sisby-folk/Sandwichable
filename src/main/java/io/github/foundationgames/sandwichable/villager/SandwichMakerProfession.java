@@ -5,8 +5,6 @@ import com.google.common.collect.ImmutableSet;
 import io.github.foundationgames.sandwichable.blocks.BlocksRegistry;
 import io.github.foundationgames.sandwichable.items.ItemsRegistry;
 import io.github.foundationgames.sandwichable.util.Util;
-import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.fabricmc.fabric.api.object.builder.v1.villager.VillagerProfessionBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.Inventories;
@@ -27,6 +25,7 @@ import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.poi.PointOfInterestType;
 import org.jetbrains.annotations.Nullable;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.Arrays;
 
@@ -131,9 +130,9 @@ public class SandwichMakerProfession {
 
     public enum SellableSandwiches {
         APPLE(new Item[]{Items.BREAD, Items.APPLE, Items.BREAD}),
-        BACON_LETTUCE_TOMATO(new Item[]{ItemsRegistry.BREAD_SLICE, com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry.COOKED_BACON.get(), ItemsRegistry.LETTUCE_LEAF, ItemsRegistry.TOMATO_SLICE, ItemsRegistry.BREAD_SLICE}),
+        BACON_LETTUCE_TOMATO(new Item[]{ItemsRegistry.BREAD_SLICE, ModItems.COOKED_BACON.get(), ItemsRegistry.LETTUCE_LEAF, ItemsRegistry.TOMATO_SLICE, ItemsRegistry.BREAD_SLICE}),
         CHICKEN_CHEESE(new Item[]{ItemsRegistry.TOASTED_BREAD_SLICE, ItemsRegistry.CHEESE_SLICE_REGULAR, Items.COOKED_CHICKEN, ItemsRegistry.LETTUCE_LEAF, ItemsRegistry.TOASTED_BREAD_SLICE}),
-        MEAT_LOVERS(new Item[]{Items.BREAD, com.nhoryzon.mc.farmersdelight.registry.ItemsRegistry.COOKED_BACON.get(), Items.COOKED_BEEF, Items.COOKED_CHICKEN, Items.COOKED_PORKCHOP, Items.BREAD}),
+        MEAT_LOVERS(new Item[]{Items.BREAD, ModItems.COOKED_BACON.get(), Items.COOKED_BEEF, Items.COOKED_CHICKEN, Items.COOKED_PORKCHOP, Items.BREAD}),
         VEGETABLE(new Item[]{Items.BREAD, ItemsRegistry.LETTUCE_LEAF, Items.CARROT, Items.BEETROOT, Items.BAKED_POTATO, ItemsRegistry.TOMATO_SLICE, Items.BREAD}),
         GOLDEN_APPLE(new Item[]{Items.BREAD, Items.GOLDEN_APPLE, Items.BREAD});
 

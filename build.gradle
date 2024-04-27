@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.2-SNAPSHOT'
+	id 'fabric-loom' version '1.6.+'
 	id 'maven-publish'
 }
 
@@ -24,6 +24,23 @@ repositories {
 	maven { url = "https://maven.shedaniel.me/" }
 	maven { url = "https://api.modrinth.com/maven" }
 	maven { url = "https://maven.gegy.dev" }
+	maven {
+		name = "Greenhouse Maven"
+		url = 'https://maven.greenhouseteam.dev/releases/'
+	}
+	maven { url "https://mvn.devos.one/releases/" } // Porting Lib
+	maven {
+		url "https://maven.jamieswhiteshirt.com/libs-release" // Reach Entity Attributes (Required by Porting Lib)
+		content {
+			includeGroup "com.jamieswhiteshirt"
+		}
+	}
+	maven {
+		url "https://jitpack.io/" // Fabric ASM
+		content {
+			excludeGroup "io.github.fabricators_of_create"
+		}
+	}
 }
 
 // please stop making mod menu transitive
@@ -47,7 +64,9 @@ dependencies {
 		exclude(group: "io.github.prospector")
 	}
 	modApi "maven.modrinth:mealapi:${project.mealapi_version}"
-	modImplementation "maven.modrinth:farmers-delight-fabric:${project.farmersdelight_version}"
+	modImplementation("vectorwing:FarmersDelight:${farmersdelight_version}+refabricated") {
+		exclude(group: "net.fabricmc")
+	}
 
 	/*
 	modRuntimeOnly("squeek.appleskin:appleskin-fabric:${project.appleskin_version}") {
